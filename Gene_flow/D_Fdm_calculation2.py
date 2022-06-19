@@ -26,6 +26,8 @@ def read_group_list(file_):
             if not line:
                 continue
             line=line.split()
+            if line[1] not in [P1,P2,P3,P4]:
+                continue
             groups[line[0]]=line[1]
     return groups
 
@@ -174,8 +176,8 @@ def main():
     elif args.cal_type=='Window_file':
         windows=read_windows(args.winfile)
     global groups,P1,P2,P3,P4
-    groups=read_group_list(args.group_list)
     P1,P2,P3,P4=read_group_order(args.group_order)
+    groups=read_group_list(args.group_list)
     lines=read_vcf(args.vcf_file)
     global samples
     samples=next(lines).split()[9:]
